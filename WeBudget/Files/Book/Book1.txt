@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-16"?>
+<Book xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>1</Id>
+  <Author>Chuck Palanik</Author>
+    <Name>Fight Club</Name>
+  <Annotation>Text</Annotation>
+  <PicPath>55</PicPath>
+  <Price>750</Price>
+
+</Book>

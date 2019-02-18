@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "CreateBook";
+}
+
+@model WeBookShop.Models.Book
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Добавление книги</h2>
+@using (Html.BeginForm())
+{
+
+    @Html.LabelFor(model => model.Author, "Автор")
+    <br />
+    @Html.EditorFor(model => model.Author)
+    <br /><br />
+    @Html.LabelFor(model => model.Name, "Название")
+    <br />
+    @Html.EditorFor(model => model.Name)
+    <br /><br />
+    @Html.LabelFor(model => model.Annotation, "Аннотация")
+    <br />
+    @Html.EditorFor(model => model.Annotation)
+    <br /><br />
+
+    @Html.LabelFor(model => model.Price, "Цена")
+    <br />
+    @Html.EditorFor(model => model.Price)
+    <br /><br />
+    <input type="submit" value="Добавить" />
+}

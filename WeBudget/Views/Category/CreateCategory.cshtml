@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "CreateCategory";
+}
+
+
+@model WeBookShop.Models.Category
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Добавление категории</h2>
+
+@using (Html.BeginForm())
+{
+
+    @Html.LabelFor(model => model.Name, "Название")
+    <br />
+    @Html.EditorFor(model => model.Name)
+    <br /><br />
+
+    <input type="submit" value="Добавить" />
+}
+

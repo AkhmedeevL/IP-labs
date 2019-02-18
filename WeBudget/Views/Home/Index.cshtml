@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>BookShop</title>
+    <link rel="stylesheet" href="~/Content/styles.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Helvetica:400,300" type="text/css" />
+
+ 
+</head>
+<body>
+    <p class="fig">
+        <img src="~/img/hero1.jpg"
+             width="1769" height="360" alt="Фотография" >
+
+    </p>
+    <style>
+
+        .fig {
+            text-align: center; /* Выравнивание по центру */
+        }
+
+
+        .center {
+            width: 700px; /* Ширина элемента в пикселах */
+            padding: 10px; /* Поля вокруг текста */
+            margin: auto; /* Выравниваем по центру */
+        }
+    </style>
+
+    <div class="center">
+        <nav>
+            <ul class="top-menu">
+                <li class="active">ГЛАВНАЯ</li>
+                <li><a href="~/Home/News">НОВОСТИ</a></li>
+                <li><a href="~/Home/Table">ДОСТАВКА</a></li>
+                <li><a href="~/Home/Contact">ОБРАТНАЯ СВЯЗЬ</a></li>
+                <li><a href="~/Home/About">О МАГАЗИНЕ</a></li>
+
+
+
+            </ul>
+        </nav>
+    </div>
+
+    <div class="center">
+        <div id="heading">
+            <h1> Книжный магазин</h1>
+        </div>
+    </div>
+
+
+    <aside>
+        <nav>
+            <ul class="aside-menu">
+                <li><a href="~/Book/Books">КНИГИ</a></li>
+                <li><a href="~/Category/Categorys">КАТЕГОРИИ</a></li>
+
+            </ul>
+        </nav>
+    </aside>
+
+    <section>
+        <blockquote>
+            <p>
+                Книжный магазин
+            </p>
+            <cite> </cite>
+        </blockquote>
+    </section>
+
+    <div class="row">
+        
+                        <img src="img/1.jpg" alt="">
+                
+                        <img src="img/2.jpg" alt="">
+                  
+
+               
+    </div><!-- .row -->
+
+    <footer>
+        <div id="footer">
+            <div id="tw">
+                <h3>16-09-2018</h3>
+                <p>
+                    Книжный магазин
+                </p>
+            </div>
+            <div id="sitemap">
+                <h3>О НАС</h3>
+                <div>
+                    <a href="Contact">КОНТАКТЫ</a>
+                    <a href="About">О НАС</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "EditCategory";
+}
+
+<h2>Редактирование категории</h2>
+
+@{
+    ViewBag.Title = "Редактировать услугу";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model WeBookShop.Models.Category
+<h2>Расход № @Model.Id</h2>
+@using (Html.BeginForm("EditCategory", "Category", FormMethod.Post))
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(m => m.Name, "Название")
+            <br />
+            @Html.EditorFor(m => m.Name)
+        </p>
+       
+        
+        <p><input type="submit" value="Отправить" /></p>
+    </fieldset>
+}

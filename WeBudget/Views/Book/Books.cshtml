@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Books";
+}
+
+@model IEnumerable<WeBookShop.Service.Abstract.BaseEntity>
+@{
+    Layout = null;
+}
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>BookShop</title>
+    <link rel="stylesheet" href="~/Content/styles.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Helvetica:400,300" type="text/css" />
+
+</head>
+
+
+<style>
+
+    .fig {
+        text-align: center; /* Выравнивание по центру */
+    }
+
+
+    .center {
+        width: 700px; /* Ширина элемента в пикселах */
+        padding: 10px; /* Поля вокруг текста */
+        margin: auto; /* Выравниваем по центру */
+    }
+</style>
+
+<p class="fig">
+    <img src="~/img/hero1.jpg"
+         width="1263" height="320" alt="Фотография">
+
+</p>
+
+
+<div class="center">
+    <nav>
+        <ul class="top-menu">
+            <li><a href="~/Home/Index">ГЛАВНАЯ</li>
+            <li><a href="~/Home/News">НОВОСТИ</a></li>
+            <li><a href="~/Home/Table">ДОСТАВКА</a></li>
+            <li><a href="~/Home/Contact">ОБРАТНАЯ СВЯЗЬ</a></li>
+            <li><a href="~/Home/About">О МАГАЗИНЕ</a></li>
+
+
+
+        </ul>
+    </nav>
+</div> 
+
+<aside>
+    <nav>
+        <ul class="aside-menu">
+            <li><a href="~/Book/Books">КНИГИ</a></li>
+            <li><a href="~/Category/Categorys">КАТЕГОРИИ</a></li>
+
+        </ul>
+    </nav>
+</aside>
+
+<div class="center">
+    <h2>Книги</h2>
+
+    @{ var grid = new WebGrid(Model); }
+    <div>
+        @grid.GetHtml(columns: grid.Columns(
+                                                grid.Column("Id", "№"),
+                                                grid.Column("Author", "Автор"),
+                                                grid.Column("Name", "Название"),
+                                                grid.Column("Annotation", "Аннотация"),
+                                                grid.Column("Price", "Цена"),
+                                                grid.Column("Редактировать", format: @<a href="~/Book/EditBook/@item.Id"> Редактировать</a>),
+                                                grid.Column("Удалить", format: @<a href="~/Book/DeleteBook/@item.Id"> Удалить</a>)
+                                                ), tableStyle: "table-bordered")
+    </div>
+    <input type="button" value="Добавить" onClick='location.href="CreateBook"'>
+</div>
