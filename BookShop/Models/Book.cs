@@ -13,14 +13,14 @@ namespace WeBookShop.Models
         public string Author { get; set; }
         public string Name { get; set; }
 
-        public Category Category { get; set; }
+        //public Category Category { get; set; }
          
         public string Annotation { get; set; }
          
         public string[] PicPath { get; set; }
          
         public double Price { get; set; }
-         
+
  
 
     }

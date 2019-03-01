@@ -1,0 +1,14 @@
+﻿
+
+@model IEnumerable<WeBookShop.Models.Book>
+<div id="results">
+    <h3>Все книги автора : </h3>
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@item.Name</li>
+            <li>@item.Annotation</li>
+            <li>@item.Price</li>
+        }
+    </ul>
+</div>

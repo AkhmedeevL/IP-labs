@@ -8,6 +8,7 @@
     Layout = null;
 }
 
+
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
@@ -52,11 +53,12 @@
 
         </ul>
     </nav>
-</div> 
+</div>
 
 <aside>
     <nav>
         <ul class="aside-menu">
+            
             <li><a href="~/Book/Books">КНИГИ</a></li>
             <li><a href="~/Category/Categorys">КАТЕГОРИИ</a></li>
 
@@ -76,8 +78,21 @@
                                                 grid.Column("Annotation", "Аннотация"),
                                                 grid.Column("Price", "Цена"),
                                                 grid.Column("Редактировать", format: @<a href="~/Book/EditBook/@item.Id"> Редактировать</a>),
-                                                grid.Column("Удалить", format: @<a href="~/Book/DeleteBook/@item.Id"> Удалить</a>)
-                                                ), tableStyle: "table-bordered")
+                                                                  grid.Column("Удалить", format: @<a href="~/Book/DeleteBook/@item.Id"> Удалить</a>)
+                                                                         ), tableStyle: "table-bordered")
     </div>
     <input type="button" value="Добавить" onClick='location.href="CreateBook"'>
+
+
+    <div>
+        @using (Ajax.BeginForm("BookSearchForm", new AjaxOptions { UpdateTargetId = "results" }))
+        {
+            <input type="text" name="SearchAuthor" />
+            <input type="submit" value="Найти" />
+        }
+        <div id="results"></div>
+        @Scripts.Render("~/scripts/jquery-3.3.1.min.js")
+        @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+   
+    </div>
 </div>

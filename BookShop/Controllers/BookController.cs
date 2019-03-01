@@ -30,6 +30,19 @@ namespace WeBookShop.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult BookSearchForm(string SearchAuthor)
+        {
+            BookShopContext db = new BookShopContext();
+            var allbooks = db.Books.Where(a => a.Author.Contains(SearchAuthor)).ToList();
+
+            if (allbooks.Count <= 0)
+            {
+                return HttpNotFound();
+            }
+            return PartialView(allbooks);
+        }
+
         [HttpGet]
         public ActionResult EditBook(int? id)
         {
@@ -41,6 +54,7 @@ namespace WeBookShop.Controllers
             return HttpNotFound();
         }
 
+ 
         [HttpPost]
         public ActionResult EditBook(Book Book)
         {
@@ -72,5 +86,17 @@ namespace WeBookShop.Controllers
         {
             return View(Bookservice.getList());
         }
+
+
+
+        
+
+
+  
+        /*
+        public JsonResult JsonSearch(string SearchAuthor)
+        {
+            return Json(BookService.GetBook(SearchAuthor));
+        }  */
     }
 }

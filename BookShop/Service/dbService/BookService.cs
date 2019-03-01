@@ -41,6 +41,14 @@ namespace WeBookShop.Service
 
             return db.Books.ToList<BaseEntity>();
         }
+        public List<BaseEntity> GetBook(string SearchAuthor)
+        {
+            var result = db.Books.Where(x => x.Author == SearchAuthor).ToList<BaseEntity>();
+            return result;
+            //  var result = db.Diaries.Where(x => x.SchoolId.Contains(searchingSchool) || searchingSchool == null).ToList();
+        }
+
+
 
     }
 }
