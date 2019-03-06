@@ -8,6 +8,41 @@
     Layout = null;
 }
 
+<script type="text/javascript">
+    function Search() {
+        var request = document.getElementById('search');
+        var table = document.getElementById('table');
+        var reg = new RegExp(request.value, 'i');
+        var Chosen = false;
+
+
+        for (var i = 1; i < table.rows.length; i++) {
+            Chosen = false;
+
+            for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
+                Chosen = reg.test(table.rows[i].cells[j].innerHTML);
+                if (Chosen) break;
+            }
+            for (var j = table.rows[i].cells.length - 1; j >= 0; j--) {
+                if (Chosen) {
+                    table.rows[i].cells[j].style.display = "";
+                    table.rows[i].cells[j].style.backgroundColor = "red";
+                }
+                else {
+
+                    table.rows[i].cells[j].style.display = "";
+
+                    table.rows[i].cells[j].style.backgroundColor = "white";
+                }
+            }
+        }
+    }
+
+    function SendId(Id) {
+       
+        return Id;
+    }
+</script>
 
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -15,7 +50,9 @@
     <title>BookShop</title>
     <link rel="stylesheet" href="~/Content/styles.css" type="text/css" />
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Helvetica:400,300" type="text/css" />
-
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 
 
@@ -58,7 +95,7 @@
 <aside>
     <nav>
         <ul class="aside-menu">
-            
+
             <li><a href="~/Book/Books">КНИГИ</a></li>
             <li><a href="~/Category/Categorys">КАТЕГОРИИ</a></li>
 
@@ -70,29 +107,133 @@
     <h2>Книги</h2>
 
     @{ var grid = new WebGrid(Model); }
-    <div>
-        @grid.GetHtml(columns: grid.Columns(
-                                                grid.Column("Id", "№"),
-                                                grid.Column("Author", "Автор"),
-                                                grid.Column("Name", "Название"),
-                                                grid.Column("Annotation", "Аннотация"),
-                                                grid.Column("Price", "Цена"),
-                                                grid.Column("Редактировать", format: @<a href="~/Book/EditBook/@item.Id"> Редактировать</a>),
-                                                                  grid.Column("Удалить", format: @<a href="~/Book/DeleteBook/@item.Id"> Удалить</a>)
-                                                                         ), tableStyle: "table-bordered")
-    </div>
-    <input type="button" value="Добавить" onClick='location.href="CreateBook"'>
+    <input class=form-control id="search" onkeyup=Search() placeholder="Поиск" type="text">
+    <br><br>
+
+    
 
 
-    <div>
-        @using (Ajax.BeginForm("BookSearchForm", new AjaxOptions { UpdateTargetId = "results" }))
-        {
-            <input type="text" name="SearchAuthor" />
-            <input type="submit" value="Найти" />
-        }
-        <div id="results"></div>
-        @Scripts.Render("~/scripts/jquery-3.3.1.min.js")
-        @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
-   
+    <div class="table-responsive">
+        <table class="table-bordered" id=table>
+            <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Автор</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Аннотация</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Редактировать</th>
+                    <th scope="col">Удалить</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+
+
+
+
+
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Редактирование</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Перейти к редактированию?
+                            </div>
+                            <div class="modal-footer">
+                                
+                                
+
+
+
+                                <form id="form1">
+                                    <button type="submit" id="SubButton" class="btn btn-primary">Редактировать</button>
+                                </form>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="exampleModalLong1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle1" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle1">Удаление</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Удалить выбранную книгу?
+                            </div>
+                            <div class="modal-footer">
+
+                                <form action="~/Book/DeleteBook/Book1">
+                                    <button type="submit" class="btn btn-primary">Удалить</button>
+                                </form>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @foreach (WeBookShop.Models.Book n in Model)
+                {
+                    <tr>
+                        <th scope="row">@n.Id</th>
+                        <td>@n.Author</td>
+
+                        <td>@n.Name</td>
+                        <td>@n.Annotation</td>
+
+                        <td>@n.Price</td>
+
+                        <td>
+
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong" id="EditButton" onclick="document.getElementById('form1').action = 'EditBook/' + @n.Id;"> Редактировать</button>
+
+                                    
+                         
+
+                        </td>
+
+
+                        <td>
+
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong1" onclick="SendId(@n.Id)">Удалить</button>
+
+                        </td>
+
+
+
+                    <!--   <td><a href="~/Notice/EditBook/@n.Id">Редактировать</a></td>
+        <td><a href="~/Notice/DeleteBook/@n.Id" onclick="return confirm('Выбранная книга будет удалена');"> Удалить</a></td>
+          -->
+                    </tr>
+                    }
+                </tbody>
+        </table>
+        <br>
+
+        <input type="button" value="Добавить" onClick='location.href="CreateBook"'>
+
+
+
+
+
+
+
+
     </div>
 </div>

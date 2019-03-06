@@ -13,15 +13,21 @@
 <script type="text/javascript">
 
     function checkForm() {
-        // var regex = new RegExp("^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.]((19|20)\\d\\d)$");
+
+        var regex1 = new RegExp("^.{1,100}$"); 
         var Author = $('#Author').val();
+        var regex2 = new RegExp("^.{1,100}$"); 
         var Name = $('#Name').val();
+
+        var regex3 = new RegExp("^.{1,250}$"); 
         var Annotation = $('#Annotation').val();
+
+        var regex4 = /\d{1,10}/; 
         var Price = $('#Price').val();
 
 
         var submitButton = $('#submitButton');
-        if ((Author == "") || (Name == "") || (Annotation == "") || (Price == "")) {
+        if ((Author == "") || (Name == "") || (Annotation == "") || (Price == "") || (regex1.test(Author) == false) || (regex2.test(Name) == false) || (regex3.test(Annotation) == false) || (regex4.test(Price) == false) ) {
 
 
             submitButton.prop('disabled', true);
@@ -59,7 +65,7 @@
     @Html.EditorFor(model => model.Price, new { htmlAttributes = new { onchange = "checkForm()" } })
     <br /><br />
 
+    
 
-
-          <input id="submitButton" type="submit" value="Добавить" disabled />
+    <input id="submitButton" type="submit" value="Добавить" disabled />
 }

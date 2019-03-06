@@ -33,15 +33,12 @@ namespace WeBookShop.Controllers
         [HttpPost]
         public ActionResult BookSearchForm(string SearchAuthor)
         {
+           
             BookShopContext db = new BookShopContext();
-            var allbooks = db.Books.Where(a => a.Author.Contains(SearchAuthor)).ToList();
-
-            if (allbooks.Count <= 0)
-            {
-                return HttpNotFound();
-            }
-            return PartialView(allbooks);
+            var result = db.Books.Where(x => x.Author == SearchAuthor).ToList<Book>();
+            return PartialView("BookSearchForm",result);
         }
+
 
         [HttpGet]
         public ActionResult EditBook(int? id)
